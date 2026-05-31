@@ -4,40 +4,34 @@ let task = "";
 let completedTaskCount = 0;
 
 const showTask = () => {
-    if (task == false) {
-        console.log('Задача отсутствует');
-    } else {
-        console.log(task);
-    }
+    if (!task) return console.log('Задача отсутствует');
+    console.log(task);
 }
 
 const setTask = (taskDescription) => {
-    if (task == true) {
-        console.log('Не могу добавить задачу, завершите или удалите предыдущую');
-    } else {
-        task = taskDescription;
-    }
+    if (task !== "") return console.log('Не могу добавить задачу, завершите или удалите предыдущую');
+    task = taskDescription;
 }
 
 const completeTask = () => {
+    if (task === "") return console.log('Пожалуйста, создайте задачу');
     task = "";
     completedTaskCount++;
+    console.log('Задача завершена!');
+ 
 }
 
 const deleteTask = () => {
-    if (task == false) {
-        console.log('Задача отсутствует');
-    } else {
-        task = "";
-        console.log('Задача удалена!');
-    }
+    if (!task) return console.log('Задача отсутствует');
+    task = "";
+    console.log('Задача удалена!');
 }
 
 const taskManager = () => {
     let choice;
     let taskDescription;
 
-    console.log(`Текущая задача: ${(task == false) ? 'Отсутствует' : task}.
+    console.log(`Текущая задача: ${(!task) ? 'Отсутствует' : task}.
                 \nКоличество выполненных задач: ${completedTaskCount}`);
     console.log(`\nЧто вы желаете сделать?\n1. Показать задачу\n2. Добавить задачу\n3. Завершить задачу\n4. Удалить задачу\n`)
     choice = Number(prompt('Введите номер варианта: '));
@@ -52,7 +46,6 @@ const taskManager = () => {
             break;
         case 3:
             completeTask();
-            console.log('Задача завершена!');
             break;
         case 4: 
             deleteTask();
